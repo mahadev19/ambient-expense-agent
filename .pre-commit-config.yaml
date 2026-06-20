@@ -1,0 +1,32 @@
+# .pre-commit-config.yaml — ambient-expense-agent
+# Install:    pre-commit install
+# Run manual: pre-commit run --all-files
+
+default_language_version:
+  python: python3
+
+repos:
+  # ── Standard file hygiene ──────────────────────────────────────────────────
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: end-of-file-fixer
+        name: Fix end of files
+
+      - id: trailing-whitespace
+        name: Trim trailing whitespace
+        args: [--markdown-linebreak-ext=md]
+
+  # ── Semgrep security scan (local, cross-platform) ─────────────────────────
+  - repo: local
+    hooks:
+      - id: semgrep-hardcoded-api-key
+        name: "Semgrep: detect hardcoded Google API keys"
+        description: >
+          Scans Python files for hardcoded Google API key prefixes (AIzaSy...).
+          Equivalent to: semgrep --config .semgrep/rules.yaml --error <files>
+        language: python
+        entry: python scripts/semgrep_check.py
+        types: [python]
+        pass_filenames: true
+        stages: [pre-commit]

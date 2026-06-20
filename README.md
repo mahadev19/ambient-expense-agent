@@ -88,7 +88,6 @@ uv run pytest tests/unit tests/integration
    *Note: Standard grading calls Gemini in-process. On the free tier, run the standalone grading script with UTF-8 encoding: `uv run python tests/eval/run_grade.py`.*
 
 ---
-<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/59286613-2316-4302-a685-cdfb6d654d94" />
 
 ## Docker Deployment
 
